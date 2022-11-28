@@ -1,0 +1,83 @@
+@import url(../blocks/page/page.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+/*@import url(../blocks/);*/
+
+.profile {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 36px 0 51px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile__flex {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    /*width: 168px;*/
+    height: 127px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.profile__name {
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    min-width: 294px;
+    margin: 0 4px 0 0;
+}
+
+.profile__description {
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    padding-top: 16px;
+    min-width: 336px;
+    margin: 0;
+}
+
+.edit-button {
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/edit-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px, 10px;
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    margin-left: 25px;
+}
+
+.add-button {
+    width: 150px;
+    height: 50px;
+    background-image: url(../images/vector2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22px, 22px;
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    align-self: center;
+
+}
