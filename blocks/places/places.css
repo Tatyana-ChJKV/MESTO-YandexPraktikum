@@ -1,0 +1,17 @@
+.places {
+    padding: 0;
+    margin: 0 auto;
+    list-style-type: none;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+@media (max-width: 768px) {
+    .places {
+        justify-content: center;
+        grid-template-columns: repeat(1, 282px);
+        gap: 20px;
+    }
+}

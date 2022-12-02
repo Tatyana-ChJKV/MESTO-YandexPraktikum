@@ -17,21 +17,99 @@
   <main>
 
     <section class="profile">
-      <div class="profile__flex">
-      <img class="avatar" src="images/image.jpg" alt="Фотография мужчины в красной шапке на фоне океана">
+      <div class="profile__info">
+        <img class="profile__avatar" src="images/image.jpg" alt="Фотография мужчины в красной шапке на фоне океана">
       <div>
-        <p class="profile__name">Жак-Ив Кусто<button class="edit-button"></button></p>
+        <p class="profile__name">Жак-Ив Кусто<button class="profile__edit-button"></button></p>
+
         <p class="profile__description">Исследователь океана</p>
       </div>
       </div>
-      <button class="add-button"></button>
+      <button class="profile__add-button"></button>
+    </section>
+
+    <section class="form">
+    <div class="popup popup_opened popup__overlay">
+      <form class="popup__container">
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <fieldset class="form__text-input">
+          <input type="text" class="form__text" placeholder="Жак-Ив Кусто">
+        </fieldset>
+        <fieldset class="form__text-input">
+          <input type="text" class="form__text" placeholder="Исследователь океана">
+        </fieldset>
+        <div class="popup__button-container">
+        <button class="popup__button">Сохранить</button>
+        </div>
+      </form>
+      <button class="popup__close-button"><img src="images/Close_Icon.png"></button>
+    </div>
+    </section>
+
+    <section class="elements">
+      <ul class="places">
+        <li>
+          <div class="places__frame">
+          <img class="places__element" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Кирпичный замок на фоне гор">
+          <div class="places__description-flex">
+            <p class="places__description">Карачаевск</p>
+            <button class="places__button"></button>
+          </div>
+          </div>
+        </li>
+        <li>
+          <div class="places__frame">
+          <img class="places__element" src="images/kirill-pershin-1404681-unsplash.png" alt="Приэльбрусье во время заката">
+          <div class="places__description-flex">
+            <p class="places__description">Гора Эльбрус</p>
+            <button class="places__button"></button>
+          </div>
+          </div>
+        </li>
+        <li>
+          <div class="places__frame">
+          <img class="places__element" src="images/kirill-pershin-1556355-unsplash.png" alt="Вид на осенний лес и горы на заднем плане">
+          <div class="places__description-flex">
+            <p class="places__description">Домбай</p>
+            <button class="places__button"></button>
+          </div>
+          </div>
+        </li>
+        <li>
+          <div class="places__frame">
+          <img class="places__element" src="images/kirill-pershin-1404681-unsplash.png" alt="Приэльбрусье во время заката">
+          <div class="places__description-flex">
+            <p class="places__description">Гора Эльбрус</p>
+            <button class="places__button"></button>
+          </div>
+          </div>
+        </li>
+        <li>
+          <div class="places__frame">
+          <img class="places__element" src="images/kirill-pershin-1556355-unsplash.png" alt="Вид на осенний лес и горы на заднем плане">
+          <div class="places__description-flex">
+            <p class="places__description">Домбай</p>
+            <button class="places__button"></button>
+          </div>
+          </div>
+        </li>
+        <li>
+          <div class="places__frame">
+          <img class="places__element" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Кирпичный замок на фоне гор">
+          <div class="places__description-flex">
+            <p class="places__description">Карачаево-Черкессия</p>
+            <button class="places__button"></button>
+          </div>
+          </div>
+        </li>
+      </ul>
 
     </section>
 
   </main>
 
   <footer>
-
+    <p class="footer">© 2020 Mesto Russia</p>
   </footer>
 
 </body>

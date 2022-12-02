@@ -1,0 +1,11 @@
+.places__button {
+    background-image: url(../../../images/Vector_heart.png);
+    width: 22px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    background-color: white;
+    padding: 0;
+}
