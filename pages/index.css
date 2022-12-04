@@ -1,4 +1,10 @@
+@import url(../vendor/normalize.css);
+
+@import url(../vendor/fonts.css);
+
 @import url(../blocks/page/page.css);
+
+@import url(../blocks/link-opacity/link-opacity.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -11,6 +17,17 @@
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__overlay/popup__overlay.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__header/popup__header.css);
+@import url(../blocks/popup/__text-input/popup__text-input.css);
+@import url(../blocks/popup/__form-text/popup__form-text.css);
+@import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/__close-image/popup__close-image.css);
+
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__frame/places__frame.css);
 @import url(../blocks/places/__element/places__element.css);
@@ -19,90 +36,3 @@
 @import url(../blocks/places/__button/places__button.css);
 
 @import url(../blocks/footer/footer.css);
-
-
-.form {
-
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    /*opacity: 0.5;*/
-    z-index: 0;
-}
-
-.popup_opened {
-    display: flex;
-}
-
-.popup__container {
-    width: 430px;
-    height: 330px;
-    background-color: white;
-    border-radius: 10px;
-    z-index: 100;
-
-}
-
-.popup__overlay {
-    max-width: 100%;
-    height: 100%;
-}
-
-.popup__button-container {
-    padding-top: 48px;
-}
-
-.popup__button {
-    width: 358px;
-    height: 50px;
-    margin: auto 36px auto 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    border-radius: 2px;
-    border: 0;
-    color: white;
-}
-
-.popup__header {
-    padding: 34px 36px 24px ;
-    margin: 0;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-}
-
-.form__text-input {
-    width: 358px;
-    height: 27px;
-    border: 0;
-    margin: 0 auto;
-    padding: 30px 0 0 0;
-    display: flex;
-    text-align: center;
-}
-
-.form__text {
-    border-top: 0;
-    border-left: 0;
-    border-bottom: 1px solid gray;
-    border-right: 0;
-    width: 100%;
-    font-size: 14px;
-    line-height: 17px;
-}
-
-.popup__close-button {
-
-
-
-}

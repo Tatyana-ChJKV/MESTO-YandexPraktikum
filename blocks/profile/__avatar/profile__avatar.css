@@ -7,7 +7,5 @@
 @media (max-width: 768px) {
     .profile__avatar {
         margin: 0 auto 22px auto;
-
-        /*position: center;*/
     }
 }
