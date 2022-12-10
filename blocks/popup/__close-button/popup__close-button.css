@@ -1,12 +1,24 @@
 .popup__close-button {
-    margin-left: 475px;
-    background-color: transparent;
     border: none;
+    background-image: url(../../../images/close-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: transparent;
+    width: 32px;
+    height: 32px;
+    padding: 16px;
+    margin-top: -40px;
+    margin-left: 8px;
+
 }
 
 @media (max-width: 768px) {
     .popup__close-button {
-        margin-left: 260px;
-        padding-bottom: 16px;
+        width: 20px;
+        height: 20px;
+        padding: 10px;
+        margin-bottom: 16px;
+        margin-left: -20px;
     }
 }

@@ -4,15 +4,20 @@
     font-size: 18px;
     line-height: 22px;
     padding-top: 16px;
-    min-width: 336px;
+    max-width: 336px;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
     .profile__description {
+        max-width: 282px;
         font-size: 14px;
         line-height: 17px;
         text-align: center;
         padding-top: 14px;
+        display: flex;
+        justify-content: center;
     }
 }
