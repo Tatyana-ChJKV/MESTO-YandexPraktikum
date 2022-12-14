@@ -7,98 +7,82 @@
   <title>Место</title>
 </head>
 <body class="page">
-  <header class="header">
-    <div class="header__logo"></div>
-  </header>
-  <main>
-    <section class="profile">
-      <div class="profile__info">
-        <img class="profile__avatar" src="images/image.jpg" alt="Фотография мужчины в красной шапке на фоне океана">
-        <div>
-          <h1 class="profile__name">Жак-Ив Кусто
-            <button type="button" class="profile__edit-button link-opacity"></button>
-          </h1>
-          <p class="profile__description">Исследователь океана</p>
+<header class="header">
+  <div class="header__logo"></div>
+</header>
+<main>
+  <section class="profile">
+    <div class="profile__info">
+      <img class="profile__avatar" src="images/image.jpg" alt="Фотография мужчины в красной шапке на фоне океана">
+      <div>
+        <div class="profile__name-button">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button type="button" class="profile__edit-button link-opacity"></button>
         </div>
+        <p class="profile__description">Исследователь океана</p>
       </div>
-      <button type="button" class="profile__add-button link-opacity"></button>
-    </section>
-    <section>
-    <div class="popup popup_opened">
-        <div class="popup__container">
-          <form>
-           <h2 class="popup__header">Редактировать профиль</h2>
-            <fieldset class="popup__text-input">
-              <input type="text" name="name" class="popup__form-text" placeholder="Жак-Ив Кусто">
-              <input type="text" name="description" class="popup__form-text" placeholder="Исследователь океана">
-            </fieldset>
-            <button type="submit" class="popup__button popup__button-container link-opacity">Сохранить</button>
-          </form>
-          <button type="button" class="popup__close-button link-opacity"></button>
-        </div>
     </div>
-    </section>
-    <section class="elements">
-      <ul class="places">
-        <li>
-          <div class="places__frame">
-            <img class="places__element" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Кирпичный замок на фоне гор">
-            <div class="places__description-flex">
-              <p class="places__description">Карачаевск</p>
-              <button type="button" class="places__button"></button>
-            </div>
+    <button type="button" class="profile__add-button link-opacity"></button>
+  </section>
+
+
+
+  <section class="elements">
+    <ul class="places">
+      <template id="place">
+        <li class="places__frame">
+          <img class="places__element" src="" alt="">
+          <button type="button" class="delete__button"></button>
+          <div class="places__description-flex">
+            <p class="places__description"></p>
+            <button type="button" class="places__button"></button>
           </div>
         </li>
-        <li>
-          <div class="places__frame">
-            <img class="places__element" src="images/kirill-pershin-1404681-unsplash.png" alt="Приэльбрусье во время заката">
-            <div class="places__description-flex">
-              <p class="places__description">Гора Эльбрус</p>
-              <button type="button" class="places__button"></button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="places__frame">
-            <img class="places__element" src="images/kirill-pershin-1556355-unsplash.png" alt="Вид на осенний лес и горы на заднем плане">
-            <div class="places__description-flex">
-              <p class="places__description">Домбай</p>
-              <button type="button" class="places__button"></button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="places__frame">
-            <img class="places__element" src="images/kirill-pershin-1404681-unsplash.png" alt="Приэльбрусье во время заката">
-            <div class="places__description-flex">
-              <p class="places__description">Гора Эльбрус</p>
-              <button type="button" class="places__button"></button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="places__frame">
-            <img class="places__element" src="images/kirill-pershin-1556355-unsplash.png" alt="Вид на осенний лес и горы на заднем плане">
-            <div class="places__description-flex">
-              <p class="places__description">Домбай</p>
-              <button type="button" class="places__button"></button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="places__frame">
-            <img class="places__element" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Кирпичный замок на фоне гор">
-            <div class="places__description-flex">
-              <p class="places__description">Карачаево-Черкессия</p>
-              <button type="button" class="places__button"></button>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-  </main>
-  <footer>
-    <p class="footer">© 2020 Mesto Russia</p>
-  </footer>
+      </template>
+    </ul>
+  </section>
+
+  <div class="popup" id="popup-profile">
+    <div class="popup__container">
+      <form>
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <fieldset class="popup__text-input">
+          <input type="text" name="name" id="popup-form-name" class="popup__form-text" placeholder="Жак-Ив Кусто">
+          <input type="text" name="description" id="popup-form-info" class="popup__form-text"
+                 placeholder="Исследователь океана">
+        </fieldset>
+        <button type="submit" class="popup__button popup__button-container link-opacity">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button link-opacity"></button>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-full-size-image">
+    <div class="popup__container">
+      <img class="popup__full-size-image" src="" alt="">
+      <button type="button" class="popup__close-button link-opacity"></button>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-places">
+    <div class="popup__container">
+      <form>
+        <h2 class="popup__header">Новое место</h2>
+        <fieldset class="popup__text-input">
+          <input type="text" name="name" id="popup-form-place" class="popup__form-text" placeholder="Название">
+          <input type="text" name="description" id="popup-form-link" class="popup__form-text"
+                 placeholder="Ссылка на картинку">
+        </fieldset>
+        <button type="submit" class="popup__button popup__button-container link-opacity">Создать</button>
+      </form>
+      <button type="button" class="popup__close-button link-opacity"></button>
+    </div>
+  </div>
+
+</main>
+<footer>
+  <p class="footer">© 2020 Mesto Russia</p>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>

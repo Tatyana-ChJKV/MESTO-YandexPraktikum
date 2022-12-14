@@ -34,3 +34,37 @@
 @import url(../blocks/places/__button/places__button.css);
 
 @import url(../blocks/footer/footer.css);
+
+.profile__name-button {
+    display: flex;
+    align-items: center;
+}
+
+.places__button-active {
+    background-image: url(../images/heart-black.svg);
+    opacity: 1;
+}
+
+.delete__button {
+    background-image: url(../images/trash.svg);
+    width: 18px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.delete__button:hover {
+    opacity: 0.5;
+}
+
+.popup__full-size-image {
+    max-width: 75vh;
+    max-height: 75vh;
+    margin: 0;
+
+}
