@@ -24,15 +24,12 @@
     </div>
     <button type="button" class="profile__add-button link-opacity"></button>
   </section>
-
-
-
   <section class="elements">
     <ul class="places">
       <template id="place">
         <li class="places__frame">
           <img class="places__element" src="" alt="">
-          <button type="button" class="delete__button"></button>
+          <button type="button" class="places__delete-button"></button>
           <div class="places__description-flex">
             <p class="places__description"></p>
             <button type="button" class="places__button"></button>
@@ -41,7 +38,6 @@
       </template>
     </ul>
   </section>
-
   <div class="popup" id="popup-profile">
     <div class="popup__container">
       <form>
@@ -51,19 +47,11 @@
           <input type="text" name="description" id="popup-form-info" class="popup__form-text"
                  placeholder="Исследователь океана">
         </fieldset>
-        <button type="submit" class="popup__button popup__button-container link-opacity">Сохранить</button>
+        <button type="submit" class="popup__button link-opacity">Сохранить</button>
       </form>
       <button type="button" class="popup__close-button link-opacity"></button>
     </div>
   </div>
-
-  <div class="popup" id="popup-full-size-image">
-    <div class="popup__container">
-      <img class="popup__full-size-image" src="" alt="">
-      <button type="button" class="popup__close-button link-opacity"></button>
-    </div>
-  </div>
-
   <div class="popup" id="popup-places">
     <div class="popup__container">
       <form>
@@ -73,12 +61,20 @@
           <input type="text" name="description" id="popup-form-link" class="popup__form-text"
                  placeholder="Ссылка на картинку">
         </fieldset>
-        <button type="submit" class="popup__button popup__button-container link-opacity">Создать</button>
+        <button type="submit" class="popup__button link-opacity">Создать</button>
       </form>
       <button type="button" class="popup__close-button link-opacity"></button>
     </div>
   </div>
-
+  <div class="popup popup__full-image" id="popup__full-image">
+    <div class="popup__image-flexbox">
+      <figure class="popup__image-container">
+        <img class="popup__image" src="" alt="">
+        <figcaption class="popup__image-description"></figcaption>
+      </figure>
+      <button type="button" class="popup__close-button link-opacity"></button>
+    </div>
+  </div>
 </main>
 <footer>
   <p class="footer">© 2020 Mesto Russia</p>

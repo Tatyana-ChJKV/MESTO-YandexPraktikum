@@ -35,7 +35,7 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-//создаем ф-ю
+
 function initialPlace(place) {
     const places = document.querySelector('.places');
     const placeTemplate = document.querySelector('#place').content;
@@ -44,6 +44,7 @@ function initialPlace(place) {
     const placeDescription = placeFrame.querySelector('.places__description');
 
     placeImage.src = place.link;
+    placeImage.alt = place.name;
     placeDescription.textContent = place.name;
 
     places.append(placeFrame);
@@ -52,32 +53,34 @@ function initialPlace(place) {
 
     deletePlace(placeFrame);
 
-    openFullSizeImage(placeImage);
+    openFullSizeImage(placeImage, placeDescription);
 }
-//исполняем ф-ю для каждого элемента массива
+
 initialCards.forEach(initialPlace);
 
-//принимает фрэйм потому что дл каждого места есть своя иконка лайка
 function initLikeButton(placeFrame) {
     const likeButton = placeFrame.querySelector('.places__button');
     likeButton.addEventListener('click', function () {
         likeButton.classList.toggle('places__button-active');
     });
 }
-//???
+
 function deletePlace(placeFrame) {
-    const deletePlaceButton = placeFrame.querySelector('.delete__button');
+    const deletePlaceButton = placeFrame.querySelector('.places__delete-button');
     deletePlaceButton.addEventListener('click', function () {
         placeFrame.closest('.places__frame').remove();
     });
 }
 
-function openFullSizeImage(placeImage) {
+function openFullSizeImage(placeImage, placeDescription) {
     placeImage.addEventListener('click', function () {
-        const popupFullSizeImage = document.querySelector('#popup-full-size-image');
+        const popupFullSizeImage = document.querySelector('#popup__full-image');
         popupFullSizeImage.classList.add('popup_opened');
-        const popupImage = popupFullSizeImage.querySelector('.popup__full-size-image');
+        console.log(popupFullSizeImage);
+        const popupImage = popupFullSizeImage.querySelector('.popup__image');
         popupImage.src = placeImage.src;
+        const textImage = popupFullSizeImage.querySelector('.popup__image-description');
+        textImage.textContent = placeDescription.textContent;
         const closeFullSizeImage = popupFullSizeImage.querySelector('.popup__close-button');
         closeFullSizeImage.addEventListener('click', function () {
             closePopup(popupFullSizeImage);
@@ -117,7 +120,6 @@ popupProfile.addEventListener('submit', handleFormSubmit);
 
 addPlaceButton.addEventListener('click', openPopupPlaces);
 
-// делаем все по сабмит кнопке, тащит все из формы
 function handleFormPlacesSubmit(evt) {
     evt.preventDefault();
 
@@ -130,6 +132,7 @@ function handleFormPlacesSubmit(evt) {
     const inputPlaceName = popupPlaces.querySelector('#popup-form-place');
 
     placeImage.src = inputImage.value;
+    placeImage.alt = inputPlaceName.value;
     placeDescription.textContent = inputPlaceName.value;
 
     places.prepend(placeFrame);
@@ -139,7 +142,7 @@ function handleFormPlacesSubmit(evt) {
 
     deletePlace(placeFrame);
 
-    openFullSizeImage(placeImage);
+    openFullSizeImage(placeImage, placeDescription);
 }
 
 popupPlaces.addEventListener('submit', handleFormPlacesSubmit);
