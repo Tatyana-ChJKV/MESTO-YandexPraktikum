@@ -1,0 +1,4 @@
+.places__button-active {
+    background-image: url(../../../../images/heart-black.svg);
+    opacity: 1;
+}

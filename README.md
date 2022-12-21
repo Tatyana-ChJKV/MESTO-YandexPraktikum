@@ -17,4 +17,4 @@
 * реализация сплавающих окон и работа кнопок посредством JS
 
 Ссылка на проект:
-https://github.com/Tatyana-ChJKV/mesto-project-bootcamp.git
+https://tatyana-chjkv.github.io/mesto-project-bootcamp/index.html
