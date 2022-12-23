@@ -12,7 +12,7 @@
 <main>
   <section class="profile">
     <div class="profile__info">
-      <img class="profile__avatar" src="images/image.jpg" alt="Фотография мужчины в красной шапке на фоне океана">
+      <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Фотография мужчины в красной шапке на фоне океана">
       <div>
         <div class="profile__name-button">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -39,12 +39,19 @@
   </section>
   <div class="popup" id="popup-profile">
     <div class="popup__container">
-      <form>
+      <form class="popup__form" novalidate>
         <h2 class="popup__header">Редактировать профиль</h2>
         <fieldset class="popup__text-input">
-          <input type="text" name="name" id="popup-form-name" class="popup__form-text" placeholder="Жак-Ив Кусто">
+          <label class="popup__input">
+            <input type="text" name="name" id="popup-form-name" class="popup__form-text" placeholder="Жак-Ив Кусто"
+                 required minlength="2" maxlength="40">
+            <span class="popup__input-error popup-form-name-error"></span>
+          </label>
+          <label class="popup__input">
           <input type="text" name="description" id="popup-form-info" class="popup__form-text"
-                 placeholder="Исследователь океана">
+                 placeholder="Исследователь океана" required minlength="2" maxlength="200">
+            <span class="popup__input-error popup-form-info-error"></span>
+          </label>
         </fieldset>
         <button type="submit" class="popup__button link-opacity">Сохранить</button>
       </form>
@@ -53,7 +60,7 @@
   </div>
   <div class="popup" id="popup-places">
     <div class="popup__container">
-      <form>
+      <form class="popup__form" novalidate>
         <h2 class="popup__header">Новое место</h2>
         <fieldset class="popup__text-input">
           <input type="text" name="name" id="popup-form-place" class="popup__form-text" placeholder="Название">
