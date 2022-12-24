@@ -1,3 +1,5 @@
+import * as modal from "./modal";
+
 const places = document.querySelector('.places');
 const initialCards = [
     {
@@ -33,16 +35,17 @@ function deletePlace(placeFrame) {
     });
 }
 
-function create(imageSrc, description) {
+function create(imageLink, description) {
     const placeTemplate = document.querySelector('#place').content;
     const place = placeTemplate.querySelector('.places__frame').cloneNode(true);
     const placeImg = place.querySelector('.places__element');
     const placeDescription = place.querySelector('.places__description');
-    placeImg.src = imageSrc;
+    placeImg.src = imageLink;
     placeImg.alt = description;
     placeDescription.textContent = description;
     initLikeButton(place);
     deletePlace(place);
+    openFullSizeImage(placeImg, placeDescription);
     return place;
 }
 
@@ -61,4 +64,23 @@ function addCardToPlaces(card, onTop) {
     }
 }
 
-export {create, places, addCardToPlaces, initialCards};
+function openFullSizeImage(placeImage, placeDescription) {
+    placeImage.addEventListener('click', function () {
+        const popup = document.querySelector('#popup__full-image');
+        modal.openPopup(popup);
+        const popupImage = popup.querySelector('.popup__image');
+        popupImage.src = placeImage.src;
+        popupImage.alt = placeDescription.textContent;
+        const textImage = popup.querySelector('.popup__image-description');
+        textImage.textContent = placeDescription.textContent;
+    });
+}
+
+function initPlaces() {
+    initialCards.forEach(function (place) {
+        const newCard = create(place.link, place.name);
+        addCardToPlaces(newCard, false);
+    })
+}
+
+export {create, addCardToPlaces, initPlaces};
