@@ -12,14 +12,15 @@
 <main>
   <section class="profile">
     <div class="profile__info">
-      <img class="profile__avatar" src="<%=require('./images/image.jpg')%>"
-           alt="Фотография мужчины в красной шапке на фоне океана">
+      <div class="profile__id"></div>
+      <img class="profile__avatar" src="" alt="">
+      <div class="profile__avatar-edit-button"></div>
       <div>
         <div class="profile__name-button">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button type="button" class="profile__edit-button link-opacity"></button>
         </div>
-        <p class="profile__description">Исследователь океана</p>
+        <p class="profile__description"></p>
       </div>
     </div>
     <button type="button" class="profile__add-button link-opacity"></button>
@@ -33,6 +34,8 @@
           <div class="places__description-flex">
             <p class="places__description"></p>
             <button type="button" class="places__button"></button>
+            <div class="places__id"></div>
+            <p class="places__like-button"></p>
           </div>
         </li>
       </template>
@@ -86,6 +89,31 @@
         <img class="popup__image" src="" alt="">
         <figcaption class="popup__image-description"></figcaption>
       </figure>
+      <button type="button" class="popup__close-button link-opacity"></button>
+    </div>
+  </div>
+  <div class="popup" id="popup-profile-avatar">
+    <div class="popup__container">
+      <form class="popup__form" novalidate>
+        <h2 class="popup__header">Обновить аватар</h2>
+        <fieldset class="popup__text-input">
+          <label class="popup__input">
+            <input type="url" name="profile-url" id="popup-profile-url" class="popup__form-text"
+                   placeholder="Ссылка на новый аватар">
+            <span class="popup__input-error popup-profile-url-error"></span>
+          </label>
+        </fieldset>
+        <button type="submit" class="popup__button link-opacity">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button link-opacity"></button>
+    </div>
+  </div>
+  <div class="popup popup_confirmation" id="popup-confirmation">
+    <div class="popup__container">
+      <form class="popup__form" novalidate>
+        <h2 class="popup__header popup__header-confirmation">Вы уверены?</h2>
+        <button type="submit" class="popup__button link-opacity">Да</button>
+      </form>
       <button type="button" class="popup__close-button link-opacity"></button>
     </div>
   </div>

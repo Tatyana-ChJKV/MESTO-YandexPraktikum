@@ -47,3 +47,34 @@
 @import url(blocks/places/__delete-button/places__delete-button.css);
 
 @import url(blocks/footer/footer.css);
+
+.popup_confirm {
+    min-height: 181px;
+}
+
+.popup__header-confirmation {
+    padding: 34px 36px 38px;
+}
+.places__like-button {
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.places__id {
+    display: none;
+}
+
+.profile__id {
+    display: none;
+}
+
+.places__delete-button-inactive {
+    display: none;
+}
+
+/*.profile__avatar-edit-button {*/
+/*    background-image: url("src/images/edit-button.svg");*/
+/*    transition: opacity;*/
+/*    opacity: 0.8;*/
+/*}*/

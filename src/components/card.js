@@ -1,59 +1,66 @@
 import * as modal from "./modal";
+import {deleteCard, deleteLike, putLike} from "./api";
 
 const places = document.querySelector('.places');
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
-function deletePlace(placeFrame) {
+
+function deletePlace(placeFrame, card, profileId) {
     const deletePlaceButton = placeFrame.querySelector('.places__delete-button');
-    deletePlaceButton.addEventListener('click', function () {
-        placeFrame.closest('.places__frame').remove();
+    if (card.owner._id !== profileId) {
+        deletePlaceButton.classList.add('places__delete-button-inactive');
+    } else {
+        deletePlaceButton.addEventListener('click', function () {
+            deleteCard(card._id)
+                .then(() => {
+                    placeFrame.closest('.places__frame').remove();
+                })
+                .catch(error => console.log(error));
+        })
+    }
+}
+
+function changeLikeButton(changeFunction, card, likeCounter, likeButton, add) {
+    changeFunction(card._id)
+        .then(res => {
+            likeCounter.textContent = res.likes.length;
+            add ?
+                likeButton.classList.add('places__button-active') :
+                likeButton.classList.remove('places__button-active');
+        })
+        .catch(error => console.log(error));
+}
+
+function initLikeButton(placeFrame, card, profileId) {
+    const likeButton = placeFrame.querySelector('.places__button');
+    const likeCounter = placeFrame.querySelector('.places__like-button');
+    if (card.likes.map(a => a._id).includes(profileId)) {
+        likeButton.classList.add('places__button-active');
+    }
+    likeButton.addEventListener('click', function () {
+        if (likeButton.classList.contains('places__button-active')) {
+            changeLikeButton(deleteLike, card, likeCounter, likeButton, false);
+        } else {
+            changeLikeButton(putLike, card, likeCounter, likeButton, true);
+        }
     });
 }
 
-function create(imageLink, description) {
+function create(card, profileId) {
     const placeTemplate = document.querySelector('#place').content;
     const place = placeTemplate.querySelector('.places__frame').cloneNode(true);
     const placeImg = place.querySelector('.places__element');
     const placeDescription = place.querySelector('.places__description');
-    placeImg.src = imageLink;
-    placeImg.alt = description;
-    placeDescription.textContent = description;
-    initLikeButton(place);
-    deletePlace(place);
+    const likeCounter = place.querySelector('.places__like-button');
+    const placeId = place.querySelector('.places__id');
+    placeImg.src = card.link;
+    placeImg.alt = card.name;
+    placeDescription.textContent = card.name;
+    likeCounter.textContent = card.likes.length;
+    placeId.textContent = card._id;
+    initLikeButton(place, card, profileId);
+    deletePlace(place, card, profileId);
     openFullSizeImage(placeImg, placeDescription);
     return place;
-}
-
-function initLikeButton(placeFrame) {
-    const likeButton = placeFrame.querySelector('.places__button');
-    likeButton.addEventListener('click', function () {
-        likeButton.classList.toggle('places__button-active');
-    });
 }
 
 function addCardToPlaces(card, onTop) {
@@ -76,9 +83,9 @@ function openFullSizeImage(placeImage, placeDescription) {
     });
 }
 
-function initPlaces() {
+function initPlaces(initialCards, profileId) {
     initialCards.forEach(function (place) {
-        const newCard = create(place.link, place.name);
+        const newCard = create(place, profileId);
         addCardToPlaces(newCard, false);
     })
 }
