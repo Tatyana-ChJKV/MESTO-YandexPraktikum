@@ -73,8 +73,19 @@
     display: none;
 }
 
-/*.profile__avatar-edit-button {*/
-/*    background-image: url("src/images/edit-button.svg");*/
-/*    transition: opacity;*/
-/*    opacity: 0.8;*/
-/*}*/
+.profile__avatar-edit-button {
+    background-size: 26px 26px;
+    background-repeat : no-repeat;
+    background-position: center;
+    width: 120px;
+    height:120px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.profile__avatar-edit-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url(../images/edit-button.svg);
+}

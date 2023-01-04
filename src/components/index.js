@@ -6,6 +6,8 @@ import {getPlaces, getProfileInfo} from "./api";
 
 const profile = document.querySelector('.profile');
 const profileAvatar = profile.querySelector('.profile__avatar');
+const avatarEditButton = profile.querySelector('.profile__avatar-edit-button');
+const popupProfileAvatar = document.querySelector('#popup-profile-avatar');
 const profileName = profile.querySelector('.profile__name');
 const profileDescription = profile.querySelector('.profile__description');
 const profileId = profile.querySelector('.profile__id');
@@ -14,6 +16,7 @@ const editButton = document.querySelector('.profile__edit-button');
 const closePopupButtons = Array.from(document.querySelectorAll('.popup__close-button'));
 const popupPlaces = document.querySelector('#popup-places');
 const addPlaceButton = document.querySelector('.profile__add-button');
+
 
 function setProfileInfo(profile) {
     profileName.textContent = profile.name;
@@ -31,6 +34,14 @@ Promise.all([getProfileInfo(), getPlaces()])
     .catch(error => console.log(error));
 
 enableValidation();
+
+avatarEditButton.addEventListener('click', function () {
+    modal.openPopup(popupProfileAvatar);
+});
+
+popupProfileAvatar.addEventListener('submit', function () {
+   modal.submitPopup(popupProfileAvatar);
+});
 
 editButton.addEventListener('click', function () {
     modal.openPopup(popupProfile);

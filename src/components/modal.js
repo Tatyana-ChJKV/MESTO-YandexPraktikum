@@ -1,5 +1,5 @@
 import {addCardToPlaces, create} from "./card";
-import {addNewCard, editProfile} from "./api";
+import {addNewCard, changeProfilePicture, editProfile} from "./api";
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
@@ -32,6 +32,18 @@ function submitPopupProfile(popup) {
     closePopup();
 }
 
+function submitPopupProfileAvatar(popup) {
+    const imageUrl = popup.querySelector('#popup-profile-url');
+    const profileAvatar = document.querySelector('.profile__avatar');
+
+    renderLoading(popup, 'Сохранение...');
+    changeProfilePicture(imageUrl.value)
+        .then(() => profileAvatar.src = imageUrl.value)
+        .catch(err => console.log(err))
+        .finally(() => renderLoading(popup, 'Сохранить'));
+    closePopup();
+}
+
 function submitPopupPlaces(popup) {
     const popupName = popup.querySelector('#popup-form-place');
     const popupLink = popup.querySelector('#popup-form-link');
@@ -50,7 +62,10 @@ function submitPopupPlaces(popup) {
 export function submitPopup(popup) {
     if (popup.id === 'popup-profile') {
         submitPopupProfile(popup);
+    } else if (popup.id === 'popup-profile-avatar') {
+        submitPopupProfileAvatar(popup);
     } else if (popup.id === 'popup-places') {
         submitPopupPlaces(popup);
     }
 }
+
