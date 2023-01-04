@@ -1,8 +1,9 @@
 import * as modal from "./modal";
 import {deleteCard, deleteLike, putLike} from "./api";
+import {popupFullSize, popupFullSizeImageDescription, popupFullSizeImage} from "./utils";
 
 const places = document.querySelector('.places');
-
+const placeTemplate = document.querySelector('#place').content;
 
 function deletePlace(placeFrame, card, profileId) {
     const deletePlaceButton = placeFrame.querySelector('.places__delete-button');
@@ -46,7 +47,6 @@ function initLikeButton(placeFrame, card, profileId) {
 }
 
 function create(card, profileId) {
-    const placeTemplate = document.querySelector('#place').content;
     const place = placeTemplate.querySelector('.places__frame').cloneNode(true);
     const placeImg = place.querySelector('.places__element');
     const placeDescription = place.querySelector('.places__description');
@@ -73,13 +73,10 @@ function addCardToPlaces(card, onTop) {
 
 function openFullSizeImage(placeImage, placeDescription) {
     placeImage.addEventListener('click', function () {
-        const popup = document.querySelector('#popup__full-image');
-        modal.openPopup(popup);
-        const popupImage = popup.querySelector('.popup__image');
-        popupImage.src = placeImage.src;
-        popupImage.alt = placeDescription.textContent;
-        const textImage = popup.querySelector('.popup__image-description');
-        textImage.textContent = placeDescription.textContent;
+        modal.openPopup(popupFullSize);
+        popupFullSizeImage.src = placeImage.src;
+        popupFullSizeImage.alt = placeDescription.textContent;
+        popupFullSizeImageDescription.textContent = placeDescription.textContent;
     });
 }
 

@@ -1,22 +1,18 @@
-import '../styles/index.css';
+import '../index.css';
 import * as modal from "./modal";
 import {enableValidation} from "./validate";
 import {initPlaces} from "./card";
 import {getPlaces, getProfileInfo} from "./api";
-
-const profile = document.querySelector('.profile');
-const profileAvatar = profile.querySelector('.profile__avatar');
-const avatarEditButton = profile.querySelector('.profile__avatar-edit-button');
-const popupProfileAvatar = document.querySelector('#popup-profile-avatar');
-const profileName = profile.querySelector('.profile__name');
-const profileDescription = profile.querySelector('.profile__description');
-const profileId = profile.querySelector('.profile__id');
-const popupProfile = document.querySelector('#popup-profile');
-const editButton = document.querySelector('.profile__edit-button');
-const closePopupButtons = Array.from(document.querySelectorAll('.popup__close-button'));
-const popupPlaces = document.querySelector('#popup-places');
-const addPlaceButton = document.querySelector('.profile__add-button');
-
+import {
+    addPlaceButton,
+    avatarEditButton, closePopupButtons, formList,
+    popupEditProfileButton, popupPlaces, popupProfile,
+    popupProfileAvatar,
+    profileAvatar,
+    profileDescription,
+    profileId,
+    profileName
+} from "./utils";
 
 function setProfileInfo(profile) {
     profileName.textContent = profile.name;
@@ -33,7 +29,7 @@ Promise.all([getProfileInfo(), getPlaces()])
 })
     .catch(error => console.log(error));
 
-enableValidation();
+enableValidation(formList);
 
 avatarEditButton.addEventListener('click', function () {
     modal.openPopup(popupProfileAvatar);
@@ -43,8 +39,9 @@ popupProfileAvatar.addEventListener('submit', function () {
    modal.submitPopup(popupProfileAvatar);
 });
 
-editButton.addEventListener('click', function () {
+popupEditProfileButton.addEventListener('click', function () {
     modal.openPopup(popupProfile);
+    modal.setDefaultInput();
 });
 
 closePopupButtons.forEach(function (button) {
@@ -68,12 +65,6 @@ popupPlaces.addEventListener('submit', function () {
 document.addEventListener('click', function (evt) {
     const popup = document.querySelector('.popup_opened');
     if (evt.target === popup) {
-        modal.closePopup();
-    }
-});
-
-document.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
         modal.closePopup();
     }
 });

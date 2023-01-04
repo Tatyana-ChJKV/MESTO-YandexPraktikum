@@ -48,8 +48,7 @@ function addInputEventListeners(form) {
     });
 }
 
-export function enableValidation() {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
+export function enableValidation(formList) {
     formList.forEach(function (form) {
         form.addEventListener('submit', function (evt) {
             evt.preventDefault();

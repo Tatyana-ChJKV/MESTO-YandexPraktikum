@@ -33,9 +33,11 @@
           <button type="button" class="places__delete-button"></button>
           <div class="places__description-flex">
             <p class="places__description"></p>
-            <button type="button" class="places__button"></button>
             <div class="places__id"></div>
-            <p class="places__like-button"></p>
+            <div class="places__like-container">
+              <button type="button" class="places__button"></button>
+              <p class="places__like-button"></p>
+            </div>
           </div>
         </li>
       </template>
@@ -104,15 +106,6 @@
           </label>
         </fieldset>
         <button type="submit" class="popup__button link-opacity">Сохранить</button>
-      </form>
-      <button type="button" class="popup__close-button link-opacity"></button>
-    </div>
-  </div>
-  <div class="popup popup_confirmation" id="popup-confirmation">
-    <div class="popup__container">
-      <form class="popup__form" novalidate>
-        <h2 class="popup__header popup__header-confirmation">Вы уверены?</h2>
-        <button type="submit" class="popup__button link-opacity">Да</button>
       </form>
       <button type="button" class="popup__close-button link-opacity"></button>
     </div>

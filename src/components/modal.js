@@ -1,13 +1,32 @@
 import {addCardToPlaces, create} from "./card";
 import {addNewCard, changeProfilePicture, editProfile} from "./api";
+import {
+    popupPlacesImageName, popupPlacesImageUrl,
+    popupProfileAvatarUrl,
+    popupProfileInfo,
+    popupProfileName,
+    profileAvatar,
+    profileDescription,
+    profileName
+} from "./utils";
+
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+        closePopup();
+    }
+}
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
 }
 
 export function closePopup() {
     const popup = document.querySelector('.popup_opened');
+    const popupForm = popup.querySelector('.popup__form');
     popup.classList.remove('popup_opened');
+    setTimeout(() => popupForm.reset(), 500);
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 export function renderLoading(popup, text) {
@@ -16,16 +35,11 @@ export function renderLoading(popup, text) {
 }
 
 function submitPopupProfile(popup) {
-    const popupName = popup.querySelector('#popup-form-name');
-    const popupInfo = popup.querySelector('#popup-form-info');
-    const profileName = document.querySelector('.profile__name');
-    const profileInfo = document.querySelector('.profile__description');
-
     renderLoading(popup, 'Сохранение...');
-    editProfile(popupName.value, popupInfo.value)
+    editProfile(popupProfileName.value, popupProfileInfo.value)
         .then(() => {
-            profileName.textContent = popupName.value;
-            profileInfo.textContent = popupInfo.value;
+            profileName.textContent = popupProfileName.value;
+            profileDescription.textContent = popupProfileInfo.value;
     })
         .catch(err => console.log(err))
         .finally(() => renderLoading(popup, 'Сохранить'));
@@ -33,23 +47,17 @@ function submitPopupProfile(popup) {
 }
 
 function submitPopupProfileAvatar(popup) {
-    const imageUrl = popup.querySelector('#popup-profile-url');
-    const profileAvatar = document.querySelector('.profile__avatar');
-
     renderLoading(popup, 'Сохранение...');
-    changeProfilePicture(imageUrl.value)
-        .then(() => profileAvatar.src = imageUrl.value)
+    changeProfilePicture(popupProfileAvatarUrl.value)
+        .then(() => profileAvatar.src = popupProfileAvatarUrl.value)
         .catch(err => console.log(err))
         .finally(() => renderLoading(popup, 'Сохранить'));
     closePopup();
 }
 
 function submitPopupPlaces(popup) {
-    const popupName = popup.querySelector('#popup-form-place');
-    const popupLink = popup.querySelector('#popup-form-link');
-
     renderLoading(popup, 'Создание...');
-    addNewCard(popupName.value, popupLink.value)
+    addNewCard(popupPlacesImageName.value, popupPlacesImageUrl.value)
         .then(res => {
             const newCard = create(res, res.owner._id);
             addCardToPlaces(newCard, true);
@@ -69,3 +77,7 @@ export function submitPopup(popup) {
     }
 }
 
+export function setDefaultInput() {
+    popupProfileName.value = profileName.textContent;
+    popupProfileInfo.value = profileDescription.textContent;
+}
