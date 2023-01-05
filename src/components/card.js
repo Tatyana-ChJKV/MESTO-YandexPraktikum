@@ -1,9 +1,9 @@
 import * as modal from "./modal";
 import {deleteCard, deleteLike, putLike} from "./api";
 import {popupFullSize, popupFullSizeImageDescription, popupFullSizeImage} from "./utils";
+import {closeByEscape} from "./modal";
 
 const places = document.querySelector('.places');
-const placeTemplate = document.querySelector('#place').content;
 
 function deletePlace(placeFrame, card, profileId) {
     const deletePlaceButton = placeFrame.querySelector('.places__delete-button');
@@ -31,9 +31,8 @@ function changeLikeButton(changeFunction, card, likeCounter, likeButton, add) {
         .catch(error => console.log(error));
 }
 
-function initLikeButton(placeFrame, card, profileId) {
+function initLikeButton(placeFrame, card, profileId, likeCounter) {
     const likeButton = placeFrame.querySelector('.places__button');
-    const likeCounter = placeFrame.querySelector('.places__like-button');
     if (card.likes.map(a => a._id).includes(profileId)) {
         likeButton.classList.add('places__button-active');
     }
@@ -47,6 +46,7 @@ function initLikeButton(placeFrame, card, profileId) {
 }
 
 function create(card, profileId) {
+    const placeTemplate = document.querySelector('#place').content;
     const place = placeTemplate.querySelector('.places__frame').cloneNode(true);
     const placeImg = place.querySelector('.places__element');
     const placeDescription = place.querySelector('.places__description');
@@ -57,7 +57,7 @@ function create(card, profileId) {
     placeDescription.textContent = card.name;
     likeCounter.textContent = card.likes.length;
     placeId.textContent = card._id;
-    initLikeButton(place, card, profileId);
+    initLikeButton(place, card, profileId, likeCounter);
     deletePlace(place, card, profileId);
     openFullSizeImage(placeImg, placeDescription);
     return place;
@@ -73,10 +73,11 @@ function addCardToPlaces(card, onTop) {
 
 function openFullSizeImage(placeImage, placeDescription) {
     placeImage.addEventListener('click', function () {
-        modal.openPopup(popupFullSize);
         popupFullSizeImage.src = placeImage.src;
         popupFullSizeImage.alt = placeDescription.textContent;
         popupFullSizeImageDescription.textContent = placeDescription.textContent;
+        document.addEventListener('keydown', closeByEscape);
+        modal.openPopup(popupFullSize);
     });
 }
 

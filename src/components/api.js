@@ -1,137 +1,82 @@
-const myToken = 'cf336180-acdd-4618-920e-c3a47bf944b6';
-const mestoUrl = 'https://mesto.nomoreparties.co/v1/wbf-cohort-3/';
+import {handleResponse} from "./utils";
+
+const config = {
+    baseUrl: 'https://mesto.nomoreparties.co/v1/wbf-cohort-3',
+    headers: {
+        authorization: 'cf336180-acdd-4618-920e-c3a47bf944b6',
+        'Content-Type': 'application/json',
+    },
+};
 
 export function getProfileInfo() {
-    return fetch(`${mestoUrl}users/me`, {
-        headers: {
-            authorization: myToken
-        }
+    return fetch(`${config.baseUrl}/users/me`, {
+        headers: config.headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function getPlaces() {
-    return fetch(`${mestoUrl}cards`, {
-        headers: {
-            authorization: myToken
-        }
+    return fetch(`${config.baseUrl}/cards`, {
+        headers: config.headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function editProfile(name, about) {
-    return fetch(`${mestoUrl}users/me`, {
+    return fetch(`${config.baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: {
-            authorization: myToken,
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             name: name,
             about: about
         })
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function addNewCard(name, link) {
-    return fetch(`${mestoUrl}cards`, {
+    return fetch(`${config.baseUrl}/cards`, {
         method: 'POST',
-        headers: {
-            authorization: myToken,
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             name: name,
             link: link
         })
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function deleteCard(cardId) {
-    return fetch(`${mestoUrl}cards/${cardId}`, {
+    return fetch(`${config.baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
-        headers: {
-            authorization: myToken,
-            'Content-Type': 'application/json'
-        }
+        headers: config.headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function putLike(cardId) {
-    return fetch(`${mestoUrl}cards/likes/${cardId}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
         method: 'PUT',
-        headers: {
-            authorization: myToken,
-            'Content-Type': 'application/json'
-        }
+        headers: config.headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function deleteLike(cardId) {
-    return fetch(`${mestoUrl}cards/likes/${cardId}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
         method: 'DELETE',
-        headers: {
-            authorization: myToken,
-            'Content-Type': 'application/json'
-        }
+        headers: config.headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }
 
 export function changeProfilePicture(imageUrl) {
-    return fetch(`${mestoUrl}users/me/avatar`, {
+    return fetch(`${config.baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: {
-            authorization: myToken,
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             avatar: imageUrl
         })
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        });
+        .then(handleResponse);
 }

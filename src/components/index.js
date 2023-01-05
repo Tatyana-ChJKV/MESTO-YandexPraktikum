@@ -7,12 +7,13 @@ import {
     addPlaceButton,
     avatarEditButton, closePopupButtons, formList,
     popupEditProfileButton, popupPlaces, popupProfile,
-    popupProfileAvatar,
+    popupProfileAvatar, popups,
     profileAvatar,
     profileDescription,
     profileId,
     profileName
 } from "./utils";
+import {closeByEscape} from "./modal";
 
 function setProfileInfo(profile) {
     profileName.textContent = profile.name;
@@ -33,6 +34,7 @@ enableValidation(formList);
 
 avatarEditButton.addEventListener('click', function () {
     modal.openPopup(popupProfileAvatar);
+    document.addEventListener('keydown', closeByEscape);
 });
 
 popupProfileAvatar.addEventListener('submit', function () {
@@ -41,12 +43,14 @@ popupProfileAvatar.addEventListener('submit', function () {
 
 popupEditProfileButton.addEventListener('click', function () {
     modal.openPopup(popupProfile);
+    document.addEventListener('keydown', closeByEscape);
     modal.setDefaultInput();
 });
 
 closePopupButtons.forEach(function (button) {
     button.addEventListener('click', function () {
         modal.closePopup();
+        document.removeEventListener('keydown', closeByEscape);
     });
 });
 
@@ -56,15 +60,19 @@ popupProfile.addEventListener('submit', function () {
 
 addPlaceButton.addEventListener('click', function () {
     modal.openPopup(popupPlaces);
+    document.addEventListener('keydown', closeByEscape);
 });
 
 popupPlaces.addEventListener('submit', function () {
     modal.submitPopup(popupPlaces);
 });
 
-document.addEventListener('click', function (evt) {
-    const popup = document.querySelector('.popup_opened');
-    if (evt.target === popup) {
-        modal.closePopup();
-    }
+popups.forEach(popup => {
+    popup.addEventListener('click', function (evt) {
+        const popup = document.querySelector('.popup_opened');
+        if (evt.target === popup) {
+            modal.closePopup();
+            document.removeEventListener('keydown', closeByEscape);
+        }
+    });
 });

@@ -10,23 +10,20 @@ import {
     profileName
 } from "./utils";
 
-function closeByEscape(evt) {
+export function closeByEscape(evt) {
     if (evt.key === 'Escape') {
         closePopup();
+        document.removeEventListener('keydown', closeByEscape);
     }
 }
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeByEscape);
 }
 
 export function closePopup() {
     const popup = document.querySelector('.popup_opened');
-    const popupForm = popup.querySelector('.popup__form');
     popup.classList.remove('popup_opened');
-    setTimeout(() => popupForm.reset(), 500);
-    document.removeEventListener('keydown', closeByEscape);
 }
 
 export function renderLoading(popup, text) {
@@ -40,31 +37,39 @@ function submitPopupProfile(popup) {
         .then(() => {
             profileName.textContent = popupProfileName.value;
             profileDescription.textContent = popupProfileInfo.value;
+            closePopup();
     })
         .catch(err => console.log(err))
         .finally(() => renderLoading(popup, 'Сохранить'));
-    closePopup();
 }
 
 function submitPopupProfileAvatar(popup) {
+    const popupForm = popup.querySelector('.popup__form');
+
     renderLoading(popup, 'Сохранение...');
     changeProfilePicture(popupProfileAvatarUrl.value)
-        .then(() => profileAvatar.src = popupProfileAvatarUrl.value)
+        .then(() => {
+            profileAvatar.src = popupProfileAvatarUrl.value;
+            closePopup();
+            popupForm.reset();
+        })
         .catch(err => console.log(err))
         .finally(() => renderLoading(popup, 'Сохранить'));
-    closePopup();
 }
 
 function submitPopupPlaces(popup) {
+    const popupForm = popup.querySelector('.popup__form');
+
     renderLoading(popup, 'Создание...');
     addNewCard(popupPlacesImageName.value, popupPlacesImageUrl.value)
         .then(res => {
             const newCard = create(res, res.owner._id);
             addCardToPlaces(newCard, true);
+            closePopup();
+            popupForm.reset();
         })
         .catch(error => console.log('Ошибка создания карточки ' + error))
         .finally(() => renderLoading(popup, 'Создать'));
-    closePopup();
 }
 
 export function submitPopup(popup) {
@@ -75,6 +80,7 @@ export function submitPopup(popup) {
     } else if (popup.id === 'popup-places') {
         submitPopupPlaces(popup);
     }
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 export function setDefaultInput() {

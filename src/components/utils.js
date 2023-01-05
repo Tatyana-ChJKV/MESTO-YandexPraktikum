@@ -3,7 +3,6 @@ export const profileAvatar = document.querySelector('.profile__avatar');
 export const profileName = document.querySelector('.profile__name');
 export const profileDescription = document.querySelector('.profile__description');
 export const profileId = document.querySelector('.profile__id');
-
 // popupProfile
 export const popupProfile = document.querySelector('#popup-profile');
 export const popupEditProfileButton = document.querySelector('.profile__edit-button');
@@ -19,10 +18,17 @@ export const addPlaceButton = document.querySelector('.profile__add-button');
 export const popupPlacesImageName = document.querySelector('#popup-form-place');
 export const popupPlacesImageUrl = document.querySelector('#popup-form-link');
 // popupFullSizeImage
-export const popupFullSize = document.querySelector('#popup__full-image');
+export const popupFullSize = document.querySelector('#popup-full-image');
 export const popupFullSizeImage = document.querySelector('.popup__image');
 export const popupFullSizeImageDescription = document.querySelector('.popup__image-description');
-
 // common
 export const formList = Array.from(document.querySelectorAll('.popup__form'));
 export const closePopupButtons = Array.from(document.querySelectorAll('.popup__close-button'));
+export const popups = [popupProfile, popupProfileAvatar, popupPlaces, popupFullSize];
+
+export function handleResponse(res) {
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject(res.status);
+}
