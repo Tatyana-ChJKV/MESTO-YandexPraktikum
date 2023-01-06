@@ -1,38 +1,44 @@
-import {addCardToPlaces, create} from "./card";
+import {addCardToPlaces, createCard} from "./card";
 import {addNewCard, changeProfilePicture, editProfile} from "./api";
 import {
+    addPlaceButton,
+    avatarEditButton,
+    popupEditProfileButton,
     popupPlacesImageName, popupPlacesImageUrl,
     popupProfileAvatarUrl,
     popupProfileInfo,
     popupProfileName,
     profileAvatar,
     profileDescription,
-    profileName
-} from "./utils";
+    profileName, submitPopupPlacesButton, submitPopupProfileButton, submitProfileAvatarButton
+} from "./constants";
+import {deactivateSubmitButton} from "./utils";
 
 export function closeByEscape(evt) {
     if (evt.key === 'Escape') {
         closePopup();
-        document.removeEventListener('keydown', closeByEscape);
     }
 }
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
 }
 
 export function closePopup() {
     const popup = document.querySelector('.popup_opened');
-    popup.classList.remove('popup_opened');
+    if (popup) {
+        popup.classList.remove('popup_opened');
+        document.removeEventListener('keydown', closeByEscape);
+    }
 }
 
-export function renderLoading(popup, text) {
-    const button = popup.querySelector('.popup__button');
+export function renderLoading(button, text) {
     button.textContent = text;
 }
 
-function submitPopupProfile(popup) {
-    renderLoading(popup, 'Сохранение...');
+export function submitPopupProfile(popup) {
+    renderLoading(submitPopupProfileButton, 'Сохранение...');
     editProfile(popupProfileName.value, popupProfileInfo.value)
         .then(() => {
             profileName.textContent = popupProfileName.value;
@@ -40,50 +46,41 @@ function submitPopupProfile(popup) {
             closePopup();
     })
         .catch(err => console.log(err))
-        .finally(() => renderLoading(popup, 'Сохранить'));
+        .finally(() => renderLoading(submitPopupProfileButton, 'Сохранить'));
 }
 
-function submitPopupProfileAvatar(popup) {
+export function submitPopupProfileAvatar(popup) {
     const popupForm = popup.querySelector('.popup__form');
 
-    renderLoading(popup, 'Сохранение...');
+    renderLoading(submitProfileAvatarButton, 'Сохранение...');
     changeProfilePicture(popupProfileAvatarUrl.value)
         .then(() => {
             profileAvatar.src = popupProfileAvatarUrl.value;
             closePopup();
             popupForm.reset();
+            deactivateSubmitButton(submitProfileAvatarButton);
         })
         .catch(err => console.log(err))
-        .finally(() => renderLoading(popup, 'Сохранить'));
+        .finally(() => renderLoading(submitProfileAvatarButton, 'Сохранить'));
 }
 
-function submitPopupPlaces(popup) {
+export function submitPopupPlaces(popup) {
     const popupForm = popup.querySelector('.popup__form');
 
-    renderLoading(popup, 'Создание...');
+    renderLoading(submitPopupPlacesButton, 'Создание...');
     addNewCard(popupPlacesImageName.value, popupPlacesImageUrl.value)
         .then(res => {
-            const newCard = create(res, res.owner._id);
+            const newCard = createCard(res, res.owner._id);
             addCardToPlaces(newCard, true);
             closePopup();
             popupForm.reset();
+            deactivateSubmitButton(submitPopupPlacesButton);
         })
         .catch(error => console.log('Ошибка создания карточки ' + error))
-        .finally(() => renderLoading(popup, 'Создать'));
+        .finally(() => renderLoading(submitPopupPlacesButton, 'Создать'));
 }
 
-export function submitPopup(popup) {
-    if (popup.id === 'popup-profile') {
-        submitPopupProfile(popup);
-    } else if (popup.id === 'popup-profile-avatar') {
-        submitPopupProfileAvatar(popup);
-    } else if (popup.id === 'popup-places') {
-        submitPopupPlaces(popup);
-    }
-    document.removeEventListener('keydown', closeByEscape);
-}
-
-export function setDefaultInput() {
+export function fillProfileInputs() {
     popupProfileName.value = profileName.textContent;
     popupProfileInfo.value = profileDescription.textContent;
 }

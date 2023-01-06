@@ -3,25 +3,19 @@ import * as modal from "./modal";
 import {enableValidation} from "./validate";
 import {initPlaces} from "./card";
 import {getPlaces, getProfileInfo} from "./api";
+import {setProfileInfo} from "./utils";
 import {
     addPlaceButton,
-    avatarEditButton, closePopupButtons, formList,
-    popupEditProfileButton, popupPlaces, popupProfile,
-    popupProfileAvatar, popups,
-    profileAvatar,
-    profileDescription,
+    avatarEditButton,
+    closePopupButtons,
+    popupEditProfileButton,
+    popupPlaces,
+    popupProfile,
+    popupProfileAvatar,
+    popups,
     profileId,
-    profileName
-} from "./utils";
-import {closeByEscape} from "./modal";
-
-function setProfileInfo(profile) {
-    profileName.textContent = profile.name;
-    profileDescription.textContent = profile.about;
-    profileAvatar.src = profile.avatar;
-    profileAvatar.alt = profile.about;
-    profileId.textContent = profile._id;
-}
+    validationSettings
+} from "./constants";
 
 Promise.all([getProfileInfo(), getPlaces()])
     .then(([profileResponse, placesResponse]) => {
@@ -30,49 +24,43 @@ Promise.all([getProfileInfo(), getPlaces()])
 })
     .catch(error => console.log(error));
 
-enableValidation(formList);
+enableValidation(validationSettings);
 
 avatarEditButton.addEventListener('click', function () {
     modal.openPopup(popupProfileAvatar);
-    document.addEventListener('keydown', closeByEscape);
 });
 
 popupProfileAvatar.addEventListener('submit', function () {
-   modal.submitPopup(popupProfileAvatar);
+   modal.submitPopupProfileAvatar(popupProfileAvatar);
 });
 
 popupEditProfileButton.addEventListener('click', function () {
     modal.openPopup(popupProfile);
-    document.addEventListener('keydown', closeByEscape);
-    modal.setDefaultInput();
+    modal.fillProfileInputs();
 });
 
 closePopupButtons.forEach(function (button) {
     button.addEventListener('click', function () {
         modal.closePopup();
-        document.removeEventListener('keydown', closeByEscape);
     });
 });
 
 popupProfile.addEventListener('submit', function () {
-    modal.submitPopup(popupProfile);
+    modal.submitPopupProfile(popupProfile);
 });
 
 addPlaceButton.addEventListener('click', function () {
     modal.openPopup(popupPlaces);
-    document.addEventListener('keydown', closeByEscape);
 });
 
 popupPlaces.addEventListener('submit', function () {
-    modal.submitPopup(popupPlaces);
+    modal.submitPopupPlaces(popupPlaces);
 });
 
 popups.forEach(popup => {
     popup.addEventListener('click', function (evt) {
-        const popup = document.querySelector('.popup_opened');
         if (evt.target === popup) {
             modal.closePopup();
-            document.removeEventListener('keydown', closeByEscape);
         }
     });
 });

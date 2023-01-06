@@ -1,7 +1,6 @@
 import * as modal from "./modal";
 import {deleteCard, deleteLike, putLike} from "./api";
-import {popupFullSize, popupFullSizeImageDescription, popupFullSizeImage} from "./utils";
-import {closeByEscape} from "./modal";
+import {popupFullSize, popupFullSizeImageDescription, popupFullSizeImage} from "./constants";
 
 const places = document.querySelector('.places');
 
@@ -45,7 +44,7 @@ function initLikeButton(placeFrame, card, profileId, likeCounter) {
     });
 }
 
-function create(card, profileId) {
+function createCard(card, profileId) {
     const placeTemplate = document.querySelector('#place').content;
     const place = placeTemplate.querySelector('.places__frame').cloneNode(true);
     const placeImg = place.querySelector('.places__element');
@@ -76,16 +75,15 @@ function openFullSizeImage(placeImage, placeDescription) {
         popupFullSizeImage.src = placeImage.src;
         popupFullSizeImage.alt = placeDescription.textContent;
         popupFullSizeImageDescription.textContent = placeDescription.textContent;
-        document.addEventListener('keydown', closeByEscape);
         modal.openPopup(popupFullSize);
     });
 }
 
 function initPlaces(initialCards, profileId) {
     initialCards.forEach(function (place) {
-        const newCard = create(place, profileId);
+        const newCard = createCard(place, profileId);
         addCardToPlaces(newCard, false);
     })
 }
 
-export {create, addCardToPlaces, initPlaces};
+export {createCard, addCardToPlaces, initPlaces};
